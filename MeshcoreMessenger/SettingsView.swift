@@ -44,7 +44,7 @@ struct SettingsView: View {
   var body: some View {
     NavigationView {
       Form {
-        Section(header: Text("General Settings")) {
+        Section(header: Text("Public Info")) {
           HStack {
             Text("Node Name")
             Spacer()
@@ -77,12 +77,12 @@ struct SettingsView: View {
 
           Picker("Coding Rate (CR)", selection: $codingRate) {
             ForEach(crOptions, id: \.self) {
-              Text("4/\($0)").tag($0)
+              Text("\($0)").tag($0)
             }
           }
 
           HStack {
-            Text("TX Power (dBm)")
+            Text("Transmit Power (dBm)")
             Spacer()
             TextField("TX Power", text: $txPower)
               .keyboardType(.numberPad)
