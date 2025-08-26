@@ -1,0 +1,607 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		348CE5F12E5C57F3009F408A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 348CE5D82E5C57F1009F408A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 348CE5DF2E5C57F1009F408A;
+			remoteInfo = MeshcoreMessenger;
+		};
+		348CE5FB2E5C57F3009F408A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 348CE5D82E5C57F1009F408A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 348CE5DF2E5C57F1009F408A;
+			remoteInfo = MeshcoreMessenger;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		348CE5E02E5C57F1009F408A /* MeshcoreMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeshcoreMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		348CE5F02E5C57F3009F408A /* MeshcoreMessengerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeshcoreMessengerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		348CE5FA2E5C57F3009F408A /* MeshcoreMessengerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeshcoreMessengerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		348CE61A2E5CA381009F408A /* Exceptions for "MeshcoreMessenger" folder in "MeshcoreMessenger" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 348CE5DF2E5C57F1009F408A /* MeshcoreMessenger */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		348CE5E22E5C57F1009F408A /* MeshcoreMessenger */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				348CE61A2E5CA381009F408A /* Exceptions for "MeshcoreMessenger" folder in "MeshcoreMessenger" target */,
+			);
+			path = MeshcoreMessenger;
+			sourceTree = "<group>";
+		};
+		348CE5F32E5C57F3009F408A /* MeshcoreMessengerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MeshcoreMessengerTests;
+			sourceTree = "<group>";
+		};
+		348CE5FD2E5C57F3009F408A /* MeshcoreMessengerUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MeshcoreMessengerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		348CE5DD2E5C57F1009F408A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		348CE5ED2E5C57F3009F408A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		348CE5F72E5C57F3009F408A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		348CE5D72E5C57F1009F408A = {
+			isa = PBXGroup;
+			children = (
+				348CE5E22E5C57F1009F408A /* MeshcoreMessenger */,
+				348CE5F32E5C57F3009F408A /* MeshcoreMessengerTests */,
+				348CE5FD2E5C57F3009F408A /* MeshcoreMessengerUITests */,
+				348CE5E12E5C57F1009F408A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		348CE5E12E5C57F1009F408A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				348CE5E02E5C57F1009F408A /* MeshcoreMessenger.app */,
+				348CE5F02E5C57F3009F408A /* MeshcoreMessengerTests.xctest */,
+				348CE5FA2E5C57F3009F408A /* MeshcoreMessengerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		348CE5DF2E5C57F1009F408A /* MeshcoreMessenger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 348CE6042E5C57F3009F408A /* Build configuration list for PBXNativeTarget "MeshcoreMessenger" */;
+			buildPhases = (
+				348CE5DC2E5C57F1009F408A /* Sources */,
+				348CE5DD2E5C57F1009F408A /* Frameworks */,
+				348CE5DE2E5C57F1009F408A /* Resources */,
+				348CE68D2E5D994A009F408A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				348CE5E22E5C57F1009F408A /* MeshcoreMessenger */,
+			);
+			name = MeshcoreMessenger;
+			packageProductDependencies = (
+			);
+			productName = MeshcoreMessenger;
+			productReference = 348CE5E02E5C57F1009F408A /* MeshcoreMessenger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		348CE5EF2E5C57F3009F408A /* MeshcoreMessengerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 348CE6072E5C57F3009F408A /* Build configuration list for PBXNativeTarget "MeshcoreMessengerTests" */;
+			buildPhases = (
+				348CE5EC2E5C57F3009F408A /* Sources */,
+				348CE5ED2E5C57F3009F408A /* Frameworks */,
+				348CE5EE2E5C57F3009F408A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				348CE5F22E5C57F3009F408A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				348CE5F32E5C57F3009F408A /* MeshcoreMessengerTests */,
+			);
+			name = MeshcoreMessengerTests;
+			packageProductDependencies = (
+			);
+			productName = MeshcoreMessengerTests;
+			productReference = 348CE5F02E5C57F3009F408A /* MeshcoreMessengerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		348CE5F92E5C57F3009F408A /* MeshcoreMessengerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 348CE60A2E5C57F3009F408A /* Build configuration list for PBXNativeTarget "MeshcoreMessengerUITests" */;
+			buildPhases = (
+				348CE5F62E5C57F3009F408A /* Sources */,
+				348CE5F72E5C57F3009F408A /* Frameworks */,
+				348CE5F82E5C57F3009F408A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				348CE5FC2E5C57F3009F408A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				348CE5FD2E5C57F3009F408A /* MeshcoreMessengerUITests */,
+			);
+			name = MeshcoreMessengerUITests;
+			packageProductDependencies = (
+			);
+			productName = MeshcoreMessengerUITests;
+			productReference = 348CE5FA2E5C57F3009F408A /* MeshcoreMessengerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		348CE5D82E5C57F1009F408A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					348CE5DF2E5C57F1009F408A = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					348CE5EF2E5C57F3009F408A = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 348CE5DF2E5C57F1009F408A;
+					};
+					348CE5F92E5C57F3009F408A = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 348CE5DF2E5C57F1009F408A;
+					};
+				};
+			};
+			buildConfigurationList = 348CE5DB2E5C57F1009F408A /* Build configuration list for PBXProject "MeshcoreMessenger" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 348CE5D72E5C57F1009F408A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 348CE5E12E5C57F1009F408A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				348CE5DF2E5C57F1009F408A /* MeshcoreMessenger */,
+				348CE5EF2E5C57F3009F408A /* MeshcoreMessengerTests */,
+				348CE5F92E5C57F3009F408A /* MeshcoreMessengerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		348CE5DE2E5C57F1009F408A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		348CE5EE2E5C57F3009F408A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		348CE5F82E5C57F3009F408A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		348CE68D2E5D994A009F408A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swift-format -r -i \"$SRCROOT\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		348CE5DC2E5C57F1009F408A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		348CE5EC2E5C57F3009F408A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		348CE5F62E5C57F3009F408A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		348CE5F22E5C57F3009F408A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 348CE5DF2E5C57F1009F408A /* MeshcoreMessenger */;
+			targetProxy = 348CE5F12E5C57F3009F408A /* PBXContainerItemProxy */;
+		};
+		348CE5FC2E5C57F3009F408A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 348CE5DF2E5C57F1009F408A /* MeshcoreMessenger */;
+			targetProxy = 348CE5FB2E5C57F3009F408A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		348CE6022E5C57F3009F408A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		348CE6032E5C57F3009F408A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		348CE6052E5C57F3009F408A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MeshcoreMessenger/Preview Content\"";
+				DEVELOPMENT_TEAM = 6C4GMG9WPX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeshcoreMessenger/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Meshcore Messenger";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "To commnicate with Meshcore Radio Companion";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "To commnicate with Meshcore Radio Companion";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ronangaillard.meshcore.messenger2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		348CE6062E5C57F3009F408A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MeshcoreMessenger/Preview Content\"";
+				DEVELOPMENT_TEAM = 6C4GMG9WPX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeshcoreMessenger/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Meshcore Messenger";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "To commnicate with Meshcore Radio Companion";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "To commnicate with Meshcore Radio Companion";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ronangaillard.meshcore.messenger2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		348CE6082E5C57F3009F408A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ronangaillard.MeshcoreMessengerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeshcoreMessenger.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeshcoreMessenger";
+			};
+			name = Debug;
+		};
+		348CE6092E5C57F3009F408A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ronangaillard.MeshcoreMessengerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeshcoreMessenger.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeshcoreMessenger";
+			};
+			name = Release;
+		};
+		348CE60B2E5C57F3009F408A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ronangaillard.MeshcoreMessengerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MeshcoreMessenger;
+			};
+			name = Debug;
+		};
+		348CE60C2E5C57F3009F408A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ronangaillard.MeshcoreMessengerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MeshcoreMessenger;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		348CE5DB2E5C57F1009F408A /* Build configuration list for PBXProject "MeshcoreMessenger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				348CE6022E5C57F3009F408A /* Debug */,
+				348CE6032E5C57F3009F408A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		348CE6042E5C57F3009F408A /* Build configuration list for PBXNativeTarget "MeshcoreMessenger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				348CE6052E5C57F3009F408A /* Debug */,
+				348CE6062E5C57F3009F408A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		348CE6072E5C57F3009F408A /* Build configuration list for PBXNativeTarget "MeshcoreMessengerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				348CE6082E5C57F3009F408A /* Debug */,
+				348CE6092E5C57F3009F408A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		348CE60A2E5C57F3009F408A /* Build configuration list for PBXNativeTarget "MeshcoreMessengerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				348CE60B2E5C57F3009F408A /* Debug */,
+				348CE60C2E5C57F3009F408A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 348CE5D82E5C57F1009F408A /* Project object */;
+}
