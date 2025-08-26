@@ -21,6 +21,7 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
   @Published var settings = NodeSettings()
   @Published var contactToNavigateTo: Contact?
   @Published var channelToNavigateTo: Channel?
+  @Published private(set) var unreadMessageCounts: [Data: Int] = [:]
 
   // MARK: - Private State
   private var selfPublicKey: Data?
@@ -315,6 +316,9 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
 
       DispatchQueue.main.async {
         self.conversations[contact.publicKey, default: []].append(newMessage)
+
+        let currentCount = self.unreadMessageCounts[contact.publicKey] ?? 0
+        self.unreadMessageCounts[contact.publicKey] = currentCount + 1
       }
 
       if echoEnabledContacts[contact.publicKey] == true {
@@ -401,6 +405,11 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
         wasModified = true
       }
     }
+
+    if unreadMessageCounts[contactKey] != 0 {
+      unreadMessageCounts[contactKey] = 0
+    }
+
     if wasModified {
       DispatchQueue.main.async {
         self.conversations[contactKey] = conversation
@@ -427,8 +436,7 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
   }
 
   func hasUnreadMessages(in contactKey: Data) -> Bool {
-    return conversations[contactKey]?.contains(where: { !$0.isFromCurrentUser && !$0.isRead })
-      ?? false
+    return (unreadMessageCounts[contactKey] ?? 0) > 0
   }
 
   func hasUnreadMessages(in channelID: UInt8) -> Bool {

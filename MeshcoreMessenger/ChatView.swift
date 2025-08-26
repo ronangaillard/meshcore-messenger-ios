@@ -31,12 +31,19 @@ struct ChatView: View {
             MessageView(message: message)
           }
         }
+        .onAppear {
+          if let lastMessage = messages.last {
+            scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
+          }
+        }
         .onChange(of: messages) { _ in
           if let lastMessage = messages.last {
             withAnimation {
               scrollViewProxy.scrollTo(lastMessage.id, anchor: .bottom)
             }
           }
+
+          messageService.markConversationAsRead(for: contact.publicKey)
         }
       }
 
