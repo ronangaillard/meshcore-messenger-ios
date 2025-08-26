@@ -17,6 +17,7 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
   @Published var channelConversations: [UInt8: [Message]] {
     didSet { PersistenceService.saveChannelConversations(channelConversations) }
   }
+  @Published var echoEnabledContacts: [Data: Bool] = [:]
   @Published var settings = NodeSettings()
   @Published var contactToNavigateTo: Contact?
   @Published var channelToNavigateTo: Channel?
@@ -315,6 +316,14 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
       DispatchQueue.main.async {
         self.conversations[contact.publicKey, default: []].append(newMessage)
       }
+
+      if echoEnabledContacts[contact.publicKey] == true {
+        Logger.shared.log("   -> Echo mode is ON for \(contact.name). Sending message back.")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+          self.sendMessage(to: contact, message: messageText)
+        }
+      }
     } else {
       Logger.shared.log(
         "Warning: Received message but could not find a matching contact for prefix \(pubkeyPrefix.hexEncodedString())"
@@ -493,6 +502,15 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
     Logger.shared.log("Notification received while app is in foreground.")
 
     completionHandler([.banner, .sound, .badge])
+  }
+
+  func toggleEcho(for contactKey: Data) {
+    let currentState = echoEnabledContacts[contactKey] ?? false
+    DispatchQueue.main.async {
+      self.echoEnabledContacts[contactKey] = !currentState
+    }
+    Logger.shared.log(
+      "Echo mode for \(contactKey.hexEncodedString()) is now \(!currentState ? "ON" : "OFF")")
   }
 
 }

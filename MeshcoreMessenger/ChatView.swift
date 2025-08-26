@@ -13,6 +13,7 @@ struct ChatView: View {
   @State private var messageText: String = ""
   @State private var showImagePicker = false
   @State private var selectedImageData: Data?
+  @State private var showConversationSettings = false
 
   private let characterLimit = 140
 
@@ -85,6 +86,18 @@ struct ChatView: View {
       .padding(.bottom)
     }
     .navigationTitle(contact.name)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: {
+          showConversationSettings = true
+        }) {
+          Image(systemName: "gearshape.fill")
+        }
+      }
+    }.sheet(isPresented: $showConversationSettings) {
+      ConversationSettingsView(contact: contact)
+        .environmentObject(messageService)
+    }
     .onAppear {
       messageService.markConversationAsRead(for: contact.publicKey)
     }
