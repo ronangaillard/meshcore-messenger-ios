@@ -158,7 +158,7 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
 
       DispatchQueue.main.async {
         self.settings = newSettings
-        Logger.shared.log("   -> Node settings updated. TX Power: \(newSettings.txPower) dBm")
+        Logger.shared.log("   -> Node settings updated from device. Name: \(newSettings.name)")
       }
       break
     case 12:  // RESP_CODE_BATT_AND_STORAGE
@@ -193,7 +193,7 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
   func sendAppStart() {
     Logger.shared.log("Sending CMD_APP_START to the node...")
     var frame = Data()
-    frame.append(1)
+    frame.append(1)  // CMD_APP_START
     frame.append(1)  // App version
     frame.append(Data(count: 6))  // Reserved bytes
     frame.append("Meshcore iOS".data(using: .utf8)!)
@@ -263,15 +263,17 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
   func saveNodeName(_ newName: String) {
     Logger.shared.log("Sending CMD_SET_ADVERT_NAME...")
     var frame = Data()
-    frame.append(8)
+    frame.append(8)  // CMD_SET_ADVERT_NAME
     frame.append(newName.data(using: .utf8)!)
     BLEManager.shared.writeData(frame)
+
+    refreshSettingsFromNode()
   }
 
   func saveRadioParams(freq: UInt32, bw: UInt32, sf: UInt8, cr: UInt8) {
     Logger.shared.log("Sending CMD_SET_RADIO_PARAMS...")
     var frame = Data()
-    frame.append(11)
+    frame.append(11)  // CMD_SET_RADIO_PARAMS
     var freqLE = freq.littleEndian
     var bwLE = bw.littleEndian
     frame.append(Data(bytes: &freqLE, count: 4))
@@ -279,14 +281,25 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
     frame.append(sf)
     frame.append(cr)
     BLEManager.shared.writeData(frame)
+
+    refreshSettingsFromNode()
   }
 
   func saveTxPower(_ newPower: UInt8) {
     Logger.shared.log("Sending CMD_SET_RADIO_TX_POWER...")
     var frame = Data()
-    frame.append(12)
+    frame.append(12)  // CMD_SET_RADIO_TX_POWER
     frame.append(newPower)
     BLEManager.shared.writeData(frame)
+
+    refreshSettingsFromNode()
+  }
+
+  private func refreshSettingsFromNode() {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      Logger.shared.log("Refreshing settings from node...")
+      self.sendAppStart()
+    }
   }
 
   func sendSelfAdvertisement(isFlooded: Bool) {

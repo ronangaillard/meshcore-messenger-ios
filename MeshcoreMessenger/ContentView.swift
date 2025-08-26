@@ -11,6 +11,7 @@ struct ContentView: View {
   @EnvironmentObject var imageService: ImageService
 
   @State private var showSettingsSheet = false
+  @State private var showDeviceListSheet = false
 
   @State private var contactNavigationTarget: Contact? = nil
   @State private var isContactNavigationActive = false
@@ -19,6 +20,48 @@ struct ContentView: View {
   @State private var showWelcomePopup = false
 
   var body: some View {
+    mainTabView
+      .sheet(isPresented: $showSettingsSheet) {
+        SettingsView(messageService: messageService)
+          .environmentObject(bleManager)
+          .environmentObject(messageService)
+      }
+      .sheet(isPresented: $showDeviceListSheet) {
+        DeviceListView()
+      }
+      .onReceive(messageService.$contactToNavigateTo, perform: processContactNavigation)
+      .onReceive(messageService.$channelToNavigateTo, perform: processChannelNavigation)
+
+      .onReceive(bleManager.$userDidManuallyDisconnect) { didManuallyDisconnect in
+        if didManuallyDisconnect {
+          showDeviceListSheet = true
+          bleManager.userDidManuallyDisconnect = false
+        }
+      }
+      .sheet(isPresented: $showWelcomePopup) {
+        WelcomePopupView()
+      }
+      .onAppear {
+        checkFirstLaunch()
+      }
+      .background(
+        VStack {
+          NavigationLink(
+            destination: contactNavigationTarget.map { ChatView(contact: $0) },
+            isActive: $isContactNavigationActive
+          ) { EmptyView() }
+
+          NavigationLink(
+            destination: channelNavigationTarget.map { ChannelChatView(channel: $0) },
+            isActive: $isChannelNavigationActive
+          ) { EmptyView() }
+        }
+      )
+  }
+
+  // MARK: - Main Views
+
+  private var mainTabView: some View {
     TabView {
       // Tab 1: Contacts
       NavigationView {
@@ -58,32 +101,6 @@ struct ContentView: View {
         Label("Channels", systemImage: "antenna.radiowaves.left.and.right")
       }
     }
-    .background(.bar)  // Ajoute l'arrière-plan natif de la barre
-    .sheet(isPresented: $showSettingsSheet) {
-      SettingsView(messageService: messageService)
-        .environmentObject(messageService)
-    }
-    .onReceive(messageService.$contactToNavigateTo, perform: processContactNavigation)
-    .onReceive(messageService.$channelToNavigateTo, perform: processChannelNavigation)
-    .sheet(isPresented: $showWelcomePopup) {
-      WelcomePopupView()
-    }
-    .onAppear {
-      checkFirstLaunch()
-    }
-    .background(
-      VStack {
-        NavigationLink(
-          destination: contactNavigationTarget.map { ChatView(contact: $0) },
-          isActive: $isContactNavigationActive
-        ) { EmptyView() }
-
-        NavigationLink(
-          destination: channelNavigationTarget.map { ChannelChatView(channel: $0) },
-          isActive: $isChannelNavigationActive
-        ) { EmptyView() }
-      }
-    )
   }
 
   // MARK: - Subviews
@@ -112,25 +129,28 @@ struct ContentView: View {
 
   private var trailingToolbarItems: some View {
     HStack(spacing: 15) {
-      Button(action: { showSettingsSheet = true }) {
-        Image(systemName: "gearshape")
-      }
-      .disabled(!bleManager.isConnected)
+      if bleManager.isConnected {
+        Button(action: { showSettingsSheet = true }) {
+          Image(systemName: "gearshape")
+        }
 
-      Button(action: {
-        messageService.sendSelfAdvertisement(isFlooded: false)
-      }) {
-        Image(systemName: "antenna.radiowaves.left.and.right")
-      }
-      .disabled(!bleManager.isConnected)
+        Button(action: {
+          messageService.sendSelfAdvertisement(isFlooded: false)
+        }) {
+          Image(systemName: "antenna.radiowaves.left.and.right")
+        }
 
-      Button(action: {
-        messageService.getContacts()
-        messageService.getBatteryAndStorage()
-      }) {
-        Image(systemName: "arrow.clockwise")
+        Button(action: {
+          messageService.getContacts()
+          messageService.getBatteryAndStorage()
+        }) {
+          Image(systemName: "arrow.clockwise")
+        }
+      } else {
+        Button("Connect") {
+          showDeviceListSheet = true
+        }
       }
-      .disabled(!bleManager.isConnected)
     }
   }
 
@@ -160,6 +180,7 @@ struct ContentView: View {
         }
       }
     }
+    .disabled(!bleManager.isConnected)
   }
 
   private var channelsList: some View {
@@ -182,6 +203,7 @@ struct ContentView: View {
         }
       }
     }
+    .disabled(!bleManager.isConnected)
   }
 
   // MARK: - Helper Methods
