@@ -128,14 +128,14 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
       }
       break
 
-    case 2:
+    case 2:  // RESP_CODE_CONTACTS_START
       Logger.shared.log("Receiving contact list...")
-      pendingContacts.removeAll()
+      pendingContacts = self.contacts
       break
-    case 3:
+    case 3:  // RESP_CODE_CONTACT
       parseContact(from: data)
       break
-    case 4:
+    case 4:  // RESP_CODE_END_OF_CONTACTS
       Logger.shared.log("Contact list finished.")
       DispatchQueue.main.async { self.contacts = self.pendingContacts }
       break
@@ -299,22 +299,26 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
 
   // MARK: - Data Parsing
   private func parseContact(from data: Data) {
-    Logger.shared.log("Parsing contacts")
+    Logger.shared.log("Parsing a contact...")
     guard data.count >= 132 else { return }
+
     let publicKey = data.subdata(in: 1..<33)
     let nameData = data.subdata(in: 100..<132)
     let name =
       String(bytes: nameData, encoding: .utf8)?.replacingOccurrences(of: "\0", with: "")
       .trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown"
-    let newContact = Contact(publicKey: publicKey, name: name)
+    let receivedContact = Contact(publicKey: publicKey, name: name)
 
-    Logger.shared.log("New contact name found : \(newContact.name)")
-
-    if !pendingContacts.contains(where: { $0.publicKey == newContact.publicKey }) {
-      pendingContacts.append(newContact)
-      Logger.shared.log(
-        "Parsed contact: \(newContact.name) with public key \(newContact.publicKey.hexEncodedString())"
-      )
+    if let existingContactIndex = pendingContacts.firstIndex(where: {
+      $0.publicKey == receivedContact.publicKey
+    }) {
+      // Contact already exists
+      pendingContacts[existingContactIndex] = receivedContact
+      Logger.shared.log("Updated contact: \(receivedContact.name)")
+    } else {
+      // New contact
+      pendingContacts.append(receivedContact)
+      Logger.shared.log("Added new contact: \(receivedContact.name)")
     }
   }
 
