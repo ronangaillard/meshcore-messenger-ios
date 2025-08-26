@@ -18,84 +18,95 @@ struct ContentView: View {
   @State private var isChannelNavigationActive = false
   @State private var showWelcomePopup = false
 
-  enum ActiveView {
-    case contacts, channels
-  }
-  @State private var activeView: ActiveView = .contacts
-
   var body: some View {
-    NavigationView {
-      VStack {
-        Text(bleManager.isConnected ? "Connected" : "Disconnected")
-          .foregroundColor(bleManager.isConnected ? .green : .red)
-          .padding(.bottom, 5)
-
-        Picker("View", selection: $activeView) {
-          Text("Contacts").tag(ActiveView.contacts)
-          Text("Channels").tag(ActiveView.channels)
-        }
-        .pickerStyle(SegmentedPickerStyle())
-        .padding(.horizontal)
-
-        if activeView == .contacts {
+    TabView {
+      // Tab 1: Contacts
+      NavigationView {
+        VStack {
+          statusView
           contactsList
-        } else {
+        }
+        .navigationTitle("Contacts")
+        .toolbar {
+          toolbarItems
+        }
+      }
+      .tabItem {
+        Label("Contacts", systemImage: "person.2.fill")
+      }
+
+      // Tab 2: Channels
+      NavigationView {
+        VStack {
+          statusView
           channelsList
         }
-      }
-      .navigationTitle(activeView == .contacts ? "Contacts" : "Channels")
-      .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button(action: { showSettingsSheet = true }) {
-            Image(systemName: "gearshape")
-          }
-          .disabled(!bleManager.isConnected)
-        }
-        ToolbarItem(placement: .principal) {
-          Button(action: {
-            messageService.sendSelfAdvertisement(isFlooded: false)
-          }) {
-            Image(systemName: "antenna.radiowaves.left.and.right")
-          }
-          .disabled(!bleManager.isConnected)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            messageService.getContacts()
-          }) {
-            Image(systemName: "arrow.clockwise")
-          }
-          .disabled(!bleManager.isConnected)
+        .navigationTitle("Channels")
+        .toolbar {
+          toolbarItems
         }
       }
-      .sheet(isPresented: $showSettingsSheet) {
-        SettingsView(messageService: messageService)
-          .environmentObject(messageService)
-      }
-      .onReceive(messageService.$contactToNavigateTo, perform: processContactNavigation)
-      .onReceive(messageService.$channelToNavigateTo, perform: processChannelNavigation)
-
-      .background(
-        VStack {
-          NavigationLink(
-            destination: contactNavigationTarget.map { ChatView(contact: $0) },
-            isActive: $isContactNavigationActive
-          ) { EmptyView() }
-
-          NavigationLink(
-            destination: channelNavigationTarget.map { ChannelChatView(channel: $0) },
-            isActive: $isChannelNavigationActive
-          ) { EmptyView() }
-        }
-      )
-      .sheet(isPresented: $showWelcomePopup) {
-        WelcomePopupView()
-      }
-      .onAppear {
-        checkFirstLaunch()
+      .tabItem {
+        Label("Channels", systemImage: "antenna.radiowaves.left.and.right")
       }
     }
-    .navigationViewStyle(.stack)
+    .background(.bar)  // Ajoute l'arrière-plan natif de la barre
+    .sheet(isPresented: $showSettingsSheet) {
+      SettingsView(messageService: messageService)
+        .environmentObject(messageService)
+    }
+    .onReceive(messageService.$contactToNavigateTo, perform: processContactNavigation)
+    .onReceive(messageService.$channelToNavigateTo, perform: processChannelNavigation)
+    .sheet(isPresented: $showWelcomePopup) {
+      WelcomePopupView()
+    }
+    .onAppear {
+      checkFirstLaunch()
+    }
+    .background(
+      VStack {
+        NavigationLink(
+          destination: contactNavigationTarget.map { ChatView(contact: $0) },
+          isActive: $isContactNavigationActive
+        ) { EmptyView() }
+
+        NavigationLink(
+          destination: channelNavigationTarget.map { ChannelChatView(channel: $0) },
+          isActive: $isChannelNavigationActive
+        ) { EmptyView() }
+      }
+    )
+  }
+
+  // MARK: - Subviews
+
+  private var statusView: some View {
+    Text(bleManager.isConnected ? "Connected" : "Disconnected")
+      .foregroundColor(bleManager.isConnected ? .green : .red)
+      .padding(.top, 5)
+  }
+
+  private var toolbarItems: some View {
+    HStack(spacing: 15) {
+      Button(action: { showSettingsSheet = true }) {
+        Image(systemName: "gearshape")
+      }
+      .disabled(!bleManager.isConnected)
+
+      Button(action: {
+        messageService.sendSelfAdvertisement(isFlooded: false)
+      }) {
+        Image(systemName: "antenna.radiowaves.left.and.right")
+      }
+      .disabled(!bleManager.isConnected)
+
+      Button(action: {
+        messageService.getContacts()
+      }) {
+        Image(systemName: "arrow.clockwise")
+      }
+      .disabled(!bleManager.isConnected)
+    }
   }
 
   private var contactsList: some View {
@@ -110,10 +121,16 @@ struct ContentView: View {
               .foregroundColor(.gray)
           }
           Spacer()
-          if messageService.hasUnreadMessages(in: contact.publicKey) {
-            Circle()
-              .fill(Color.blue)
-              .frame(width: 10, height: 10)
+          if let unreadCount = messageService.unreadMessageCounts[contact.publicKey],
+            unreadCount > 0
+          {
+            Text("\(unreadCount)")
+              .font(.caption)
+              .fontWeight(.bold)
+              .foregroundColor(.white)
+              .padding(5)
+              .background(Color.red)
+              .clipShape(Circle())
           }
         }
       }
@@ -126,10 +143,16 @@ struct ContentView: View {
         HStack {
           Text(channel.name)
           Spacer()
-          if messageService.hasUnreadMessages(in: channel.id) {
-            Circle()
-              .fill(Color.blue)
-              .frame(width: 10, height: 10)
+          if let unreadCount = messageService.channelConversations[channel.id]?.filter({
+            !$0.isFromCurrentUser && !$0.isRead
+          }).count, unreadCount > 0 {
+            Text("\(unreadCount)")
+              .font(.caption)
+              .fontWeight(.bold)
+              .foregroundColor(.white)
+              .padding(5)
+              .background(Color.red)
+              .clipShape(Circle())
           }
         }
       }
@@ -142,7 +165,13 @@ struct ContentView: View {
 
     self.contactNavigationTarget = contact
 
-    self.activeView = .contacts
+    // Switch to the Contacts tab if not already there.
+    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+      let rootViewController = windowScene.windows.first?.rootViewController,
+      let tabBarController = rootViewController as? UITabBarController
+    {
+      tabBarController.selectedIndex = 0  // Assuming Contacts is the first tab
+    }
 
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       self.isContactNavigationActive = true
@@ -157,7 +186,13 @@ struct ContentView: View {
 
     self.channelNavigationTarget = channel
 
-    self.activeView = .channels
+    // Switch to the Channels tab if not already there.
+    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+      let rootViewController = windowScene.windows.first?.rootViewController,
+      let tabBarController = rootViewController as? UITabBarController
+    {
+      tabBarController.selectedIndex = 1  // Assuming Channels is the second tab
+    }
 
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       self.isChannelNavigationActive = true
