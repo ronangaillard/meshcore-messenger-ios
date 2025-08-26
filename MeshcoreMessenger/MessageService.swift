@@ -22,6 +22,7 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
   @Published var contactToNavigateTo: Contact?
   @Published var channelToNavigateTo: Channel?
   @Published private(set) var unreadMessageCounts: [Data: Int] = [:]
+  @Published var batteryMilliVolts: Int?
 
   // MARK: - Private State
   private var selfPublicKey: Data?
@@ -57,19 +58,32 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
       self.getContacts()
     }
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+      self.getBatteryAndStorage()
+    }
   }
 
   // MARK: - Data Handling
   @objc private func onDataReceived(notification: Notification) {
     guard let data = notification.object as? Data else { return }
+
+    Logger.shared.log("Data received (raw): \(data.hexEncodedString())")
+
+    guard !data.isEmpty else {
+      Logger.shared.log("Received empty data packet.")
+      return
+    }
     let responseCode = data[0]
 
-    // This switch only handles message/contact/channel related codes
     switch responseCode {
-    case 2...8, 16, 17, 0x10, 0x82, 0x83, 0x88:
+    case 2...8, 12, 16, 17, 0x10, 0x82, 0x83, 0x88:
       handleProtocolPacket(data)
     default:
-      break  // Ignore codes not related to this service
+      Logger.shared.log(
+        "MessageService: Ignoring unhandled response code 0x\(String(format: "%02x", responseCode))"
+      )
+      break
     }
   }
 
@@ -147,8 +161,13 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
         Logger.shared.log("   -> Node settings updated. TX Power: \(newSettings.txPower) dBm")
       }
       break
-    case 0x10:
-      Logger.shared.log("Node message queue is empty.")
+    case 12:  // RESP_CODE_BATT_AND_STORAGE
+      guard data.count >= 3 else { return }
+      let milliVolts = data.subdata(in: 1..<3).to(type: UInt16.self).littleEndian
+      Logger.shared.log("Received battery level: \(milliVolts) mV")
+      DispatchQueue.main.async {
+        self.batteryMilliVolts = Int(milliVolts)
+      }
       break
     case 0x83:
       Logger.shared.log("Notification received: a message is waiting. Requesting it now.")
@@ -164,6 +183,11 @@ class MessageService: NSObject, ObservableObject, UNUserNotificationCenterDelega
   func getContacts() {
     Logger.shared.log("Sending CMD_GET_CONTACTS...")
     BLEManager.shared.writeData(Data([4]))
+  }
+
+  func getBatteryAndStorage() {
+    Logger.shared.log("Sending CMD_GET_BATT_AND_STORAGE...")
+    BLEManager.shared.writeData(Data([20]))
   }
 
   func sendAppStart() {

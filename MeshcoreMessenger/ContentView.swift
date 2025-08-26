@@ -23,12 +23,16 @@ struct ContentView: View {
       // Tab 1: Contacts
       NavigationView {
         VStack {
-          statusView
           contactsList
         }
-        .navigationTitle("Contacts")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-          toolbarItems
+          ToolbarItem(placement: .navigationBarLeading) {
+            leadingToolbarItems
+          }
+          ToolbarItem(placement: .navigationBarTrailing) {
+            trailingToolbarItems
+          }
         }
       }
       .tabItem {
@@ -38,12 +42,16 @@ struct ContentView: View {
       // Tab 2: Channels
       NavigationView {
         VStack {
-          statusView
           channelsList
         }
-        .navigationTitle("Channels")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-          toolbarItems
+          ToolbarItem(placement: .navigationBarLeading) {
+            leadingToolbarItems
+          }
+          ToolbarItem(placement: .navigationBarTrailing) {
+            trailingToolbarItems
+          }
         }
       }
       .tabItem {
@@ -80,13 +88,29 @@ struct ContentView: View {
 
   // MARK: - Subviews
 
-  private var statusView: some View {
-    Text(bleManager.isConnected ? "Connected" : "Disconnected")
-      .foregroundColor(bleManager.isConnected ? .green : .red)
-      .padding(.top, 5)
+  private var leadingToolbarItems: some View {
+    VStack(alignment: .leading) {
+      Text(messageService.settings.name)
+        .font(.headline)
+
+      if bleManager.isConnected {
+        HStack(spacing: 4) {
+          if messageService.batteryMilliVolts != nil {
+            Text(batteryPercentageString(millivolts: messageService.batteryMilliVolts))
+          }
+          Text(" - Connected")
+        }
+        .font(.caption)
+        .foregroundColor(.green)
+      } else {
+        Text("Disconnected")
+          .font(.caption)
+          .foregroundColor(.red)
+      }
+    }
   }
 
-  private var toolbarItems: some View {
+  private var trailingToolbarItems: some View {
     HStack(spacing: 15) {
       Button(action: { showSettingsSheet = true }) {
         Image(systemName: "gearshape")
@@ -102,6 +126,7 @@ struct ContentView: View {
 
       Button(action: {
         messageService.getContacts()
+        messageService.getBatteryAndStorage()
       }) {
         Image(systemName: "arrow.clockwise")
       }
@@ -157,6 +182,20 @@ struct ContentView: View {
         }
       }
     }
+  }
+
+  // MARK: - Helper Methods
+
+  private func batteryPercentageString(millivolts: Int?) -> String {
+    guard let mV = millivolts else { return "" }
+    // Based on a standard LiPo battery voltage range
+    let minVoltage: Float = 3000.0  // Empty
+    let maxVoltage: Float = 4200.0  // Full
+
+    let clampedVoltage = max(minVoltage, min(Float(mV), maxVoltage))
+    let percentage = ((clampedVoltage - minVoltage) / (maxVoltage - minVoltage)) * 100
+
+    return String(format: "⚡️%.0f%%", percentage)
   }
 
   private func processContactNavigation(to contact: Contact?) {
