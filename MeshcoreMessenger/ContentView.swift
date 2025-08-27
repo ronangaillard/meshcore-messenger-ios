@@ -62,43 +62,32 @@ struct ContentView: View {
   // MARK: - Main Views
 
   private var mainTabView: some View {
-    TabView {
-      // Tab 1: Contacts
-      NavigationView {
+    NavigationView {
+      TabView {
+        // Tab 1: Contacts
         VStack {
           contactsList
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            leadingToolbarItems
-          }
-          ToolbarItem(placement: .navigationBarTrailing) {
-            trailingToolbarItems
-          }
+        .tabItem {
+          Label("Contacts", systemImage: "person.2.fill")
         }
-      }
-      .tabItem {
-        Label("Contacts", systemImage: "person.2.fill")
-      }
 
-      // Tab 2: Channels
-      NavigationView {
+        // Tab 2: Channels
         VStack {
           channelsList
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            leadingToolbarItems
-          }
-          ToolbarItem(placement: .navigationBarTrailing) {
-            trailingToolbarItems
-          }
+        .tabItem {
+          Label("Channels", systemImage: "antenna.radiowaves.left.and.right")
         }
       }
-      .tabItem {
-        Label("Channels", systemImage: "antenna.radiowaves.left.and.right")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          leadingToolbarItems
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          trailingToolbarItems
+        }
       }
     }
   }
